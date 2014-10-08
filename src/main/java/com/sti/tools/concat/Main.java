@@ -13,8 +13,8 @@ public class Main {
         if (args.length < 3)
             throw new IllegalArgumentException("Requires at least 3 parameters.");
 
-        if (!args[args.length - 2].trim().equalsIgnoreCase(">"))
-            throw new IllegalArgumentException("Wrong format. Must be: 'concat src1.txt [src2.txt ...] > dst.txt'");
+        if (!args[args.length - 2].trim().equalsIgnoreCase("-o"))
+            throw new IllegalArgumentException("Wrong format. Must be: 'concat src1.txt [src2.txt ...] -o dst.txt'");
 
         for (String arg : args) {
             if (arg == null || arg.trim().isEmpty())

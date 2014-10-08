@@ -46,7 +46,7 @@ public class AppTest
 
 
         try {
-            Main.execute(new String[]{src1File.getPath(), src2File.getPath(), src3File.getPath(), ">", dstFile.getPath()});
+            Main.execute(new String[]{src1File.getPath(), src2File.getPath(), src3File.getPath(), "-o", dstFile.getPath()});
 
             String[] trueLines = {
                     "f1r1",
