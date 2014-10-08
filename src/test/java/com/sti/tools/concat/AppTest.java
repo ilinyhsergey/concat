@@ -4,8 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 
 /**
@@ -48,9 +47,51 @@ public class AppTest
 
         try {
             Main.execute(new String[]{src1File.getPath(), src2File.getPath(), src3File.getPath(), ">", dstFile.getPath()});
+
+            String[] trueLines = {
+                    "f1r1",
+                    "f1r2",
+                    "f1r3",
+                    "f2r1",
+                    "f2r2",
+                    "f2r3",
+                    "f3r1",
+                    "f3r2",
+                    "f3r3"
+            };
+            checkFileLines(trueLines, dstFile);
+
         } catch (IOException e) {
             e.printStackTrace();
             assertTrue(e.getLocalizedMessage(), false);
         }
+    }
+
+    private void checkFileLines(String[] trueLines, File file) {
+
+
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+
+            try {
+                String line;
+                int i = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    assertEquals(trueLines[i++], line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ignore) {
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
